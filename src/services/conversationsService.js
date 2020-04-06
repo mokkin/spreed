@@ -28,7 +28,7 @@ import { CONVERSATION, SHARE } from '../constants'
  * Fetches the conversations from the server.
  */
 const fetchConversations = async function() {
-	const response = await axios.get(generateOcsUrl('apps/spreed/api/v1', 2) + 'room')
+	const response = await axios.get(generateOcsUrl('apps/spreed/api/v2', 2) + 'room')
 	return response
 }
 
@@ -37,7 +37,7 @@ const fetchConversations = async function() {
  * @param {string} token The token of the conversation to be fetched.
  */
 const fetchConversation = async function(token) {
-	const response = await axios.get(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}`)
+	const response = await axios.get(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}`)
 	return response
 }
 
@@ -77,7 +77,7 @@ const searchPossibleConversations = async function(searchText, token) {
  */
 const createOneToOneConversation = async function(userId) {
 	try {
-		const response = await axios.post(generateOcsUrl('apps/spreed/api/v1', 2) + `room`, { roomType: CONVERSATION.TYPE.ONE_TO_ONE, invite: userId })
+		const response = await axios.post(generateOcsUrl('apps/spreed/api/v2', 2) + `room`, { roomType: CONVERSATION.TYPE.ONE_TO_ONE, invite: userId })
 		return response
 	} catch (error) {
 		console.debug('Error creating new one to one conversation: ', error)
@@ -91,7 +91,7 @@ const createOneToOneConversation = async function(userId) {
  */
 const createGroupConversation = async function(invite, source) {
 	try {
-		const response = await axios.post(generateOcsUrl('apps/spreed/api/v1', 2) + `room`, { roomType: CONVERSATION.TYPE.GROUP, invite, source: source || 'groups' })
+		const response = await axios.post(generateOcsUrl('apps/spreed/api/v2', 2) + `room`, { roomType: CONVERSATION.TYPE.GROUP, invite, source: source || 'groups' })
 		return response
 	} catch (error) {
 		console.debug('Error creating new group conversation: ', error)
@@ -104,7 +104,7 @@ const createGroupConversation = async function(invite, source) {
  */
 const createPrivateConversation = async function(conversationName) {
 	try {
-		const response = await axios.post(generateOcsUrl('apps/spreed/api/v1', 2) + `room`, { roomType: CONVERSATION.TYPE.GROUP, roomName: conversationName })
+		const response = await axios.post(generateOcsUrl('apps/spreed/api/v2', 2) + `room`, { roomType: CONVERSATION.TYPE.GROUP, roomName: conversationName })
 		return response
 	} catch (error) {
 		console.debug('Error creating new private conversation: ', error)
@@ -117,7 +117,7 @@ const createPrivateConversation = async function(conversationName) {
  */
 const createPublicConversation = async function(conversationName) {
 	try {
-		const response = await axios.post(generateOcsUrl('apps/spreed/api/v1', 2) + `room`, { roomType: CONVERSATION.TYPE.PUBLIC, roomName: conversationName })
+		const response = await axios.post(generateOcsUrl('apps/spreed/api/v2', 2) + `room`, { roomType: CONVERSATION.TYPE.PUBLIC, roomName: conversationName })
 		return response
 	} catch (error) {
 		console.debug('Error creating new public conversation: ', error)
@@ -130,7 +130,7 @@ const createPublicConversation = async function(conversationName) {
  * @param {string} password the password to be set
  */
 const setConversationPassword = async function(token, password) {
-	const response = await axios.put(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}/password`, {
+	const response = await axios.put(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}/password`, {
 		password,
 	})
 	return response
@@ -154,7 +154,7 @@ const setConversationName = async function(token, name) {
  */
 const deleteConversation = async function(token) {
 	try {
-		const response = await axios.delete(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}`)
+		const response = await axios.delete(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}`)
 		return response
 	} catch (error) {
 		console.debug('Error while deleting the conversation: ', error)
@@ -167,7 +167,7 @@ const deleteConversation = async function(token) {
  */
 const addToFavorites = async function(token) {
 	try {
-		const response = await axios.post(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}/favorite`)
+		const response = await axios.post(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}/favorite`)
 		return response
 	} catch (error) {
 		console.debug('Error while adding the conversation to favorites: ', error)
@@ -180,7 +180,7 @@ const addToFavorites = async function(token) {
  */
 const removeFromFavorites = async function(token) {
 	try {
-		const response = await axios.delete(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}/favorite`)
+		const response = await axios.delete(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}/favorite`)
 		return response
 	} catch (error) {
 		console.debug('Error while removing the conversation from favorites: ', error)
@@ -194,7 +194,7 @@ const removeFromFavorites = async function(token) {
  */
 const setNotificationLevel = async function(token, level) {
 	try {
-		const response = await axios.post(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}/notify`, { level })
+		const response = await axios.post(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}/notify`, { level })
 		return response
 	} catch (error) {
 		console.debug('Error while setting the notification level: ', error)
@@ -207,7 +207,7 @@ const setNotificationLevel = async function(token, level) {
  */
 const makePublic = async function(token) {
 	try {
-		const response = await axios.post(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}/public`)
+		const response = await axios.post(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}/public`)
 		return response
 	} catch (error) {
 		console.debug('Error while making the conversation public: ', error)
@@ -220,7 +220,7 @@ const makePublic = async function(token) {
  */
 const makePrivate = async function(token) {
 	try {
-		const response = await axios.delete(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}/public`)
+		const response = await axios.delete(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}/public`)
 		return response
 	} catch (error) {
 		console.debug('Error while making the conversation private: ', error)
@@ -235,7 +235,7 @@ const makePrivate = async function(token) {
  */
 const changeLobbyState = async function(token, newState, timestamp) {
 	try {
-		const response = await axios.put(generateOcsUrl('apps/spreed/api/v1', 2) + `room/${token}/webinar/lobby`, {
+		const response = await axios.put(generateOcsUrl('apps/spreed/api/v2', 2) + `room/${token}/webinar/lobby`, {
 			state: newState,
 			timer: timestamp,
 		})
