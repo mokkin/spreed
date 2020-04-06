@@ -48,3 +48,4 @@ title: Capabilities
 * `config => attachments => allowed` - Whether the user can upload files into a chat
 * `config => attachments => folder` - User defined folder where items should be uploaded to
 * `force-mute` - "forceMute" signaling messages can be sent to mute other participants.
+* `conversation-v2` - The conversations API v2 is less load heavy and should be used by clients when available. Check the difference in the [Conversation API documentation](conversation.md).
