@@ -43,7 +43,7 @@
 			class="icon icon-delete"
 			@click="removeServer" />
 
-		<span>{{ connectionState }}</span>
+		<span v-if="server">{{ connectionState }}</span>
 	</div>
 </template>
 
@@ -119,7 +119,9 @@ export default {
 	},
 
 	mounted() {
-		this.checkServerVersion()
+		if (this.server) {
+			this.checkServerVersion()
+		}
 	},
 
 	methods: {
@@ -135,6 +137,11 @@ export default {
 
 		async checkServerVersion() {
 			this.checked = false
+
+			this.customError = ''
+			this.versionFound = ''
+			this.responseNotValidJson = false
+			this.versionNotSupported = false
 
 			try {
 				const response = await getWelcomeMessage(this.index)
