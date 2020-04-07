@@ -141,7 +141,7 @@ class SignalingController extends OCSController {
 			$body = $response->getBody();
 
 			$data = json_decode($body, true);
-			if (!is_array($data) || !isset($data['version'])) {
+			if (!is_array($data)) {
 				return new DataResponse(['error' => 'JSON_INVALID'], Http::STATUS_INTERNAL_SERVER_ERROR);
 			}
 
